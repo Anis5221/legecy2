@@ -64,7 +64,8 @@ class BuildDatatableService
                     return $lead->customer ? $lead->customer->name : '';
                 })
                 ->addColumn('customer_phone', function (Lead $lead) {
-                    return $lead->customer ? $lead->customer->phone : '';
+                    $phone = $lead->customer ? $lead->customer->phone : '';
+                    return "<button  onclick='copyPhoneNumber($phone)' class='btn btn-sm btn-secondary' >Copy</button>";
                 })
                 ->addColumn('customer_address', function (Lead $lead) {
                     return $lead->customer ? $lead->customer->address : '';
@@ -108,7 +109,7 @@ class BuildDatatableService
                     ';
                     return $html;
                 })
-                 ->rawColumns(['note','action','postback','status_admin','status_caller','product_id'])
+                 ->rawColumns(['customer_phone','note','action','postback','status_admin','status_caller','product_id'])
                  ->order(function ($query) {
                      $query->orderBy('id', 'desc');
                  })
