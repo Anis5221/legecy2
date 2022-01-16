@@ -336,5 +336,13 @@ window.addEventListener('load', function() {
 // }
 
 function copyPhoneNumber(phoneNumber) {
-    navigator.clipboard.writeText(phoneNumber);
+
+    if (!phoneNumber) phoneNumber = 'No phone number';
+    // copy clipboard in string this phone number
+    const textArea = document.createElement('textarea');
+    textArea.value = phoneNumber.toString();
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    textArea.remove();
 }

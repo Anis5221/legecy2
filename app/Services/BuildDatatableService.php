@@ -64,8 +64,10 @@ class BuildDatatableService
                     return $lead->customer ? $lead->customer->name : '';
                 })
                 ->addColumn('customer_phone', function (Lead $lead) {
+
                     $phone = $lead->customer ? $lead->customer->phone : '';
-                    return "<button  onclick='copyPhoneNumber($phone)' class='btn btn-sm btn-secondary' >Copy</button>";
+                    $number = substr($phone, -4);
+                    return "<button  onclick='copyPhoneNumber(`$phone`)' class='btn btn-sm btn-secondary' >Copy</button> <span class='badge badge-pill badge-secondary'>$number</span>";
                 })
                 ->addColumn('customer_address', function (Lead $lead) {
                     return $lead->customer ? $lead->customer->address : '';
